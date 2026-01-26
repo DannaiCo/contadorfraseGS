@@ -75,32 +75,34 @@
   </div>
 
   <script>
-    const frases = [
-      "Las oportunidades no aparecen, se crean",
-      "Cada pequeño esfuerzo cuenta",
-      "Tu presente construye tu futuro"
-    ];
+  const frases = [
+    "Las oportunidades no aparecen, se crean",
+    "Cada pequeño esfuerzo cuenta",
+    "Tu presente construye tu futuro"
+  ];
 
-    function obtenerDiaDelAno() {
-      const hoy = new Date();
-      const inicio = new Date(hoy.getFullYear(), 0, 0);
-      const diff = hoy - inicio;
-      const unDia = 1000 * 60 * 60 * 24;
-      return Math.floor(diff / unDia);
-    }
+  function obtenerDiaDelAno() {
+    const hoy = new Date();
+    const inicio = new Date(hoy.getFullYear(), 0, 0);
+    const diff = hoy - inicio;
+    const unDia = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / unDia);
+  }
 
-    function cambiarContenido() {
-      const fraseRandom = frases[Math.floor(Math.random() * frases.length)];
-      document.getElementById("frase").innerText = fraseRandom;
+  function cambiarContenido() {
+    const dia = obtenerDiaDelAno();
 
-      const dia = obtenerDiaDelAno();
-      document.getElementById("contador").innerText = `Día ${dia}/365`;
-    }
+    // Selecciona frase según el día (cíclico)
+    const indiceFrase = dia % frases.length;
+    document.getElementById("frase").innerText = frases[indiceFrase];
 
-    cambiarContenido();
-    setInterval(cambiarContenido, 10000);
-  </script>
+    document.getElementById("contador").innerText = `Día ${dia}/365`;
+  }
 
+  cambiarContenido();
+  setInterval(cambiarContenido, 1000 * 60 * 60); // revisa cada hora
+</script>
 </body>
 </html>
+
 
